@@ -19,24 +19,26 @@
 ## Установка
 
 1. Клонируйте репозиторий:
-   ```bash
-   git clone https://github.com/ваш-username/context-manager.git
-Перейдите в директорию проекта:
+```bash
+git clone https://github.com/ваш-username/context-manager.git
+   ```
 
-bash
-Copy
+2. Перейдите в директорию проекта:
+   
+```bash
 cd context-manager
-Соберите проект с помощью Maven:
+```
+3. Соберите проект с помощью Maven:
 
-bash
-Copy
+```bash
 mvn clean package
-Использование
-Запустите программу:
+```
+   Использование
+   Запустите программу:
 
-bash
-Copy
+```bash
 java -jar target/context-manager-1.0-SNAPSHOT.jar
+```
 Следуйте инструкциям в консольном меню:
 
 Создайте новый контекст.
@@ -47,31 +49,54 @@ java -jar target/context-manager-1.0-SNAPSHOT.jar
 
 Просмотрите все UID.
 
-Пример JSON-шаблона для запроса контекста
-json
-Copy
-{
-"uid": "a1b2c3d4",
-"comment": "Необходимо продолжить обсуждение разработки алгоритма сортировки."
-}
-Структура проекта
-Copy
+## Пример JSON-шаблона для запроса контекста
+```JSON
+   {
+   "uid": "a1b2c3d4",
+   "comment": "Необходимо продолжить обсуждение разработки алгоритма сортировки."
+   }
+```
+## Пример работы программы
+```
+=== Меню ===
+1. Создать новый контекст
+2. Загрузить контекст из JSON-файла
+3. Восстановить контекст по UID
+4. Показать все UID
+5. Выйти
+Выберите действие: 1
+
+=== Создание нового контекста ===
+Введите тему: Разработка алгоритма
+Введите цель: Создать эффективный алгоритм сортировки
+Введите шаги (через запятую): Анализ задачи, Написание кода, Тестирование
+Введите текущий шаг: Написание кода
+Введите код (если есть): public void sort(int[] arr) { ... }
+Введите заметки: Нужно оптимизировать время выполнения.
+
+Сгенерированный UID: a1b2c3d4
+Введите комментарий для UID: Первый контекст
+Контекст успешно сохранён.
+```
+
+## Структура проекта
+```
 context-manager/
 ├── pom.xml
 ├── README.md
 ├── .gitignore
 └── src/
-├── main/
-│   └── java/
-│       └── com/
-│           └── example/
-│               ├── Context.java
-│               ├── ContextManager.java
-│               ├── ContextStorage.java
-│               ├── ConsoleUI.java
-│               └── Main.java
-└── test/
-└── java/
-└── com/
-└── example/
-└── ContextManagerTest.java
+    ├── main/
+    │   └── java/
+    │       └── com/
+    │           └── example/
+    │               ├── Context.java
+    │               ├── ContextManager.java
+    │               ├── ContextStorage.java
+    │               ├── ConsoleUI.java
+    │               └── Main.java
+    └── test/
+        └── java/
+            └── com/
+                └── example/
+                    └── ContextManagerTest.java
