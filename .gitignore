@@ -1,0 +1,31 @@
+
+---
+
+### 2. `.gitignore`
+
+```gitignore
+# Игнорируем скомпилированные файлы
+/target/
+/bin/
+/out/
+
+# Игнорируем файлы IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Игнорируем логи и временные файлы
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Игнорируем сгенерированные файлы
+context_storage.gz
+uids.txt
+restored_context_*.json
+
+# Игнорируем системные файлы
+.DS_Store
+Thumbs.db
