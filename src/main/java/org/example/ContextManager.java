@@ -7,16 +7,37 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 public class ContextManager {
+    private final Gson gson;
+    private final MessageDigest digest;
 
-    // Генерация UID на основе SHA-256
-    public static String generateUID(Context context) {
+    // Конструктор (package-private)
+    ContextManager(Gson gson, MessageDigest digest) {
+        this.gson = gson;
+        this.digest = digest;
+    }
+
+    // Статический фабричный метод
+    public static ContextManager create() {
+        try {
+            Gson gson = new Gson();
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            return new ContextManager(gson, digest);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-256 algorithm not found", e);
+        }
+    }
+
+    // Генерация UID
+    public String generateUID(Context context) {
+        if (context == null) {
+            throw new NullPointerException("Context cannot be null");
+        }
+
         try {
             String timestamp = LocalDateTime.now().toString();
-            Gson gson = new Gson();
             String jsonContext = gson.toJson(context);
             String data = timestamp + jsonContext;
 
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(data.getBytes(StandardCharsets.UTF_8));
 
             StringBuilder hexString = new StringBuilder();
@@ -26,8 +47,8 @@ public class ContextManager {
                 hexString.append(hex);
             }
             return hexString.substring(0, 8); // Первые 8 символов
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 algorithm not found", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка при генерации UID", e);
         }
     }
 }
